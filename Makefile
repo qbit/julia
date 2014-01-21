@@ -65,10 +65,10 @@ $(build_private_libdir)/sys%ji: $(build_private_libdir)/sys%bc
 $(build_private_libdir)/sys%o: $(build_private_libdir)/sys%bc
 	$(call spawn,$(LLVM_LLC)) -filetype=obj -relocation-model=pic -mattr=-bmi2,-avx2 -o $@ $<
 
-.PRECIOUS: $(BUILD)/$(JL_PRIVATE_LIBDIR)/sys%o
+.PRECIOUS: $(build_private_libdir)/sys%o
 
-$(BUILD)/$(JL_PRIVATE_LIBDIR)/sys%$(SHLIB_EXT): $(BUILD)/$(JL_PRIVATE_LIBDIR)/sys%o
-	$(CXX) -shared -fPIC -L$(BUILD)/$(JL_PRIVATE_LIBDIR) -L$(BUILD)/$(JL_LIBDIR) -o $@ $< \
+$(build_private_libdir))/sys%$(SHLIB_EXT): $(build_private_libdir)/sys%o
+	$(CXX) -shared -fPIC -L$(build_private_libdir) -L$(build_libdir) -o $@ $< \
 		$$([ $(OS) = Darwin ] && echo -Wl,-undefined,dynamic_lookup || echo -Wl,--unresolved-symbols,ignore-all ) \
 		$$([ $(OS) = WINNT ] && echo -ljulia -lssp)
 

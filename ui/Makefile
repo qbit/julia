@@ -29,11 +29,11 @@ release debug:
 	@$(call PRINT_CC, $(CC) $(CPPFLAGS) $(CFLAGS) $(DEBUGFLAGS) -c $< -o $@)
 
 ifeq ($(OS),WINNT)
-$(build_bindir)/julia.bat: ${JULIAHOME}/contrib/windows/*.bat
-	cp ${JULIAHOME}/contrib/windows/*.bat ${BUILD}$(bindir)
+$(build_bindir)/julia.bat: $(JULIAHOME)/contrib/windows/*.bat
+	cp $(JULIAHOME)/contrib/windows/*.bat $(build_bindir)
 julia-release julia-debug: $(build_bindir)/julia.bat
 julia_res.o: $(JULIAHOME)/contrib/windows/julia.rc
-	JLVER=`cat ${JULIAHOME}/VERSION` && \
+	JLVER=`cat $(JULIAHOME)/VERSION` && \
 	JLVERi=`echo $$JLVER | perl -nle \
 		'/^(\d+)\.?(\d*)\.?(\d*)/ && \
 		print int $$1,",",int $$2,",0,",int $$3'` && \

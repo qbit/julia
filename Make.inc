@@ -131,7 +131,7 @@ endif
 ifeq ($(OS), WINNT)
 fPIC =
 ifeq ($(BUILD_OS), WINNT)
-PATH := ${PATH}:${BUILD}/${libdir}:${BUILD}/${private_libdir}:/c/Program Files/7-zip
+PATH := $(PATH):$(build_libdir):$(build_private_libdir):/c/Program Files/7-zip
 endif
 EXE = .exe
 else
