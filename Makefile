@@ -189,6 +189,7 @@ else
 	-cp -a $(build_libexecdir) $(DESTDIR)$(prefix)
 	cd $(DESTDIR)$(bindir) && ln -sf julia-$(DEFAULT_REPL) julia
 endif
+
 	for suffix in $(JL_LIBS) ; do \
 		$(INSTALL_M) $(build_libdir)/lib$${suffix}*.$(SHLIB_EXT)* $(DESTDIR)$(private_libdir) ; \
 	done
@@ -226,9 +227,10 @@ else ifeq ($(OS), Linux)
 	done
 endif
 endif
+
 	# Overwrite JL_SYSTEM_IMAGE_PATH in julia binaries:
 	for julia in $(DESTDIR)$(bindir)/julia-* ; do \
-		$(build_bindir)/stringpatch $(firstword $(shell strings -t x - ./julia | grep "sys.ji")) "$(private_libdir_rel)/sys.ji" $$julia; \
+		$(build_bindir)/stringpatch $$(strings -t x - $$julia | grep "sys.ji$$" | awk '{print $$1;}' ) "$(private_libdir_rel)/sys.ji" $$julia; \
 	done
 
 	mkdir -p $(DESTDIR)$(sysconfdir)
