@@ -1146,7 +1146,8 @@ ifeq ($(OS), Darwin)
 	$(INSTALL_NAME_CMD)libfftw3f_threads.$(SHLIB_EXT) $(build_libdir)/libfftw3f_threads.$(SHLIB_EXT)
 	$(INSTALL_NAME_CHANGE_CMD) $(build_libdir)/libfftw3f.3.dylib $(INSTALL_NAME_ID_DIR)libfftw3f.dylib $(build_libdir)/libfftw3f_threads.dylib
 else ifeq ($(OS), WINNT)
-	mv -f $(build_libdir)/libfftw3f-3.dll $@
+	# note that on windows, we need to use $(build_bindir), not $(build_libdir)
+	mv -f $(build_bindir)/libfftw3f-3.dll $@
 else ifeq ($(OS), Linux)
 	for filename in $(build_libdir)/libfftw3f_threads.so* ; do \
 		[ -L $$filename ] || $(PATCHELF) --set-rpath '$$ORIGIN' $$filename ;\
@@ -1183,7 +1184,8 @@ ifeq ($(OS), Darwin)
 	$(INSTALL_NAME_CMD)libfftw3_threads.$(SHLIB_EXT) $(build_libdir)/libfftw3_threads.$(SHLIB_EXT)
 	$(INSTALL_NAME_CHANGE_CMD) $(build_libdir)/libfftw3.3.dylib $(INSTALL_NAME_ID_DIR)libfftw3.dylib $(build_libdir)/libfftw3_threads.dylib
 else ifeq ($(OS), WINNT)
-	mv -f $(build_libdir)/libfftw3-3.dll $@
+	# note that on windows, we need to use $(build_bindir), not $(build_libdir)
+	mv -f $(build_bindir)/libfftw3-3.dll $@
 else ifeq ($(OS), Linux)
 	for filename in $(build_libdir)/libfftw3_threads.so* ; do \
 		[ -L $$filename ] || $(PATCHELF) --set-rpath '$$ORIGIN' $$filename ;\
