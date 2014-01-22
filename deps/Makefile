@@ -641,7 +641,7 @@ ifeq (exists, $(shell [ -d $(JULIAHOME)/.git/modules/deps/openlibm ] && echo exi
 $(OPENLIBM_OBJ_SOURCE): $(JULIAHOME)/.git/modules/deps/openlibm/HEAD
 endif
 $(OPENLIBM_OBJ_SOURCE): openlibm/Makefile
-	$(MAKE) -C openlibm $(OPENLIBM_FLAGS)
+	$(MAKE) -C openlibm $(OPENLIBM_FLAGS) $(MAKE_COMMON)
 	touch -c $@
 $(OPENLIBM_OBJ_TARGET): $(OPENLIBM_OBJ_SOURCE) | $(build_libdir)
 	cp openlibm/libopenlibm.a $(build_libdir)/libopenlibm.a
@@ -676,7 +676,7 @@ ifeq (exists, $(shell [ -d $(JULIAHOME)/.git/modules/deps/openspecfun ] && echo 
 $(OPENSPECFUN_OBJ_SOURCE): $(JULIAHOME)/.git/modules/deps/openspecfun/HEAD
 endif
 $(OPENSPECFUN_OBJ_SOURCE): openspecfun/Makefile
-	$(MAKE) -C openspecfun $(OPENSPECFUN_FLAGS)
+	$(MAKE) -C openspecfun $(OPENSPECFUN_FLAGS) $(MAKE_COMMON)
 	touch -c $@
 $(OPENSPECFUN_OBJ_TARGET): $(OPENSPECFUN_OBJ_SOURCE) | $(build_libdir)
 	cp openspecfun/libopenspecfun.a $(build_libdir)/libopenspecfun.a
@@ -753,7 +753,7 @@ ifeq (exists, $(shell [ -d $(JULIAHOME)/.git/modules/deps/Rmath ] && echo exists
 $(RMATH_OBJ_SOURCE): $(JULIAHOME)/.git/modules/deps/Rmath/HEAD
 endif
 $(RMATH_OBJ_SOURCE): Rmath/Make.inc $(LIBRANDOM_OBJ_TARGET)
-	$(MAKE) -C Rmath/src $(RMATH_FLAGS)
+	$(MAKE) -C Rmath/src $(RMATH_FLAGS) $(MAKE_COMMON)
 	touch -c $@
 $(RMATH_OBJ_TARGET): $(RMATH_OBJ_SOURCE) | $(build_libdir)
 	cp $< $@
