@@ -446,8 +446,10 @@ ifeq ($(ARCH),i686)
 JLDFLAGS += -Wl,--large-address-aware
 endif
 UNTRUSTED_SYSTEM_LIBM = 1
-private_libdir = bin
-libdir = bin
+private_libdir = $(bindir)
+libdir = $(bindir)
+build_private_libdir = $(build_bindir)
+build_libdir = $(build_bindir)
 endif
 
 # Intel libraries
