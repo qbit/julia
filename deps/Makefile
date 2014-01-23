@@ -1431,10 +1431,6 @@ endif
 	echo 1 > $@
 $(GMP_OBJ_TARGET): $(GMP_SRC_TARGET) gmp-$(GMP_VER)/checked
 	$(MAKE) -C gmp-$(GMP_VER) $(LIBTOOL_CCLD) install $(MAKE_COMMON)
-ifeq ($(OS),WINNT)
-	mv -f $(build_libdir)/libgmp.lib $(build_libdir)/libgmp.lib
-	mv -f $(build_libdir)/libgmp.dll $@
-endif
 	$(INSTALL_NAME_CMD)libgmp.dylib $@
 	touch -c $@
 
