@@ -89,7 +89,7 @@ run-julia:
 run:
 	@$(call spawn,$(cmd))
 
-$(build_bindir)/stringpatch:
+$(build_bindir)/stringpatch: $(build_bindir)
 	@$(call PRINT_CC, $(CC) -o $(build_bindir)/stringpatch contrib/stringpatch.c)
 
 
